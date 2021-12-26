@@ -7,7 +7,7 @@ import threading
 # create GUI
 root = tk.Tk()
 root.title("Countdown Timer")
-root.geometry("340x300")
+root.geometry("340x330")
 
 total_time = int(0)
 
@@ -71,8 +71,9 @@ def progress_bar(args):
     global total_time, hour, minute, second
     for i in range(total_time):
         all_prog['value'] += 2
-        root.update_idletasks()   ###### update for tkinter freeze
+        root.update_idletasks()   # update for tkinter freeze
         time.sleep(1)
+        percent_lbl.config(text="Current Progress: "+str(all_prog['value'])+"%")
 
 
 def reset():
@@ -115,13 +116,17 @@ t_live.set("Countdown Clock")
 total_lbl = tk.Label(f0, font=("Helvetica", 18), relief="flat", border=7, justify='right',
                     bg="#32174d", fg="gray", textvariable=t_live)
 
+percent_lbl = tk.Label(f0, font=("Helvetica", 15), relief="flat", border=7, justify='right',
+                    bg="#32174d", fg="gray",text="Current Progress: 0%" )
+
 hr_live_lbl.grid(row=0, column=0)
 hr_lbl.grid(row=1, column=0, padx=5, )
 min_live_lbl.grid(row=0, column=1)
 min_lbl.grid(row=1, column=1, padx=5, )
 sec_live_lbl.grid(row=0, column=2)
 sec_lbl.grid(row=1, column=2, padx=5, )
-total_lbl.grid(row=4, column=0, columnspan=3, pady=10, padx=5, sticky='nsew')
+percent_lbl.grid(row=3, column=0, columnspan=3, padx=5, pady=1)
+total_lbl.grid(row=5, column=0, columnspan=3, pady=10, padx=5, sticky='nsew')
 
 
 # progress bars
@@ -148,10 +153,10 @@ start_btn = tk.Button(f0, font=("Helvetica", 13), anchor="center", activebackgro
 # start_btn = tk.Button(f0, font=("Helvetica", 12), anchor="center", activebackground="#7B68EE", border=5,
 #                  bg="#A569BD", relief=tk.GROOVE, text="Start", command=lambda: threading.Thread(start_count()).start() )
 
-hr_btn.grid(row=3, column=0, padx=10, pady=8)
-min_btn.grid(row=3, column=1, padx=10, pady=8)
-sec_btn.grid(row=3, column=2, padx=10, pady=8)
-start_btn.grid(row=5, column=1)
+hr_btn.grid(row=4, column=0, padx=10, pady=8)
+min_btn.grid(row=4, column=1, padx=10, pady=8)
+sec_btn.grid(row=4, column=2, padx=10, pady=8)
+start_btn.grid(row=6, column=1)
 
 
 
